@@ -14,7 +14,157 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          recalled: Json
+          role: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          recalled?: Json
+          role: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          recalled?: Json
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      insights: {
+        Row: {
+          cards: Json
+          created_at: string
+          id: string
+          summary: string | null
+          user_id: string
+          window_days: number
+        }
+        Insert: {
+          cards?: Json
+          created_at?: string
+          id?: string
+          summary?: string | null
+          user_id: string
+          window_days?: number
+        }
+        Update: {
+          cards?: Json
+          created_at?: string
+          id?: string
+          summary?: string | null
+          user_id?: string
+          window_days?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "insights_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      memories: {
+        Row: {
+          blob_id: string | null
+          created_at: string
+          id: string
+          job_id: string | null
+          memory_id: string | null
+          namespace: string
+          source: string
+          status: string
+          superseded_by: string | null
+          text: string
+          user_id: string
+        }
+        Insert: {
+          blob_id?: string | null
+          created_at?: string
+          id?: string
+          job_id?: string | null
+          memory_id?: string | null
+          namespace: string
+          source?: string
+          status?: string
+          superseded_by?: string | null
+          text: string
+          user_id: string
+        }
+        Update: {
+          blob_id?: string | null
+          created_at?: string
+          id?: string
+          job_id?: string | null
+          memory_id?: string | null
+          namespace?: string
+          source?: string
+          status?: string
+          superseded_by?: string | null
+          text?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memories_superseded_by_fkey"
+            columns: ["superseded_by"]
+            isOneToOne: false
+            referencedRelation: "memories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "memories_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          accent: string
+          created_at: string
+          handle: string
+          id: string
+          name: string
+        }
+        Insert: {
+          accent?: string
+          created_at?: string
+          handle: string
+          id: string
+          name: string
+        }
+        Update: {
+          accent?: string
+          created_at?: string
+          handle?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
