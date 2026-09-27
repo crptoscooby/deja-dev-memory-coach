@@ -15,6 +15,8 @@ import { Route as ApiCheckinRouteImport } from './routes/api/checkin'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiInsightsRouteImport } from './routes/api/insights'
 import { Route as ApiMemoriesRouteImport } from './routes/api/memories'
+import { Route as ApiProfilesRouteImport } from './routes/api/profiles'
+import { Route as ApiSeedWalrusRouteImport } from './routes/api/seed-walrus'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +48,16 @@ const ApiMemoriesRoute = ApiMemoriesRouteImport.update({
   path: '/api/memories',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiProfilesRoute = ApiProfilesRouteImport.update({
+  id: '/api/profiles',
+  path: '/api/profiles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSeedWalrusRoute = ApiSeedWalrusRouteImport.update({
+  id: '/api/seed-walrus',
+  path: '/api/seed-walrus',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +66,8 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/insights': typeof ApiInsightsRoute
   '/api/memories': typeof ApiMemoriesRoute
+  '/api/profiles': typeof ApiProfilesRoute
+  '/api/seed-walrus': typeof ApiSeedWalrusRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/insights': typeof ApiInsightsRoute
   '/api/memories': typeof ApiMemoriesRoute
+  '/api/profiles': typeof ApiProfilesRoute
+  '/api/seed-walrus': typeof ApiSeedWalrusRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +87,8 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/insights': typeof ApiInsightsRoute
   '/api/memories': typeof ApiMemoriesRoute
+  '/api/profiles': typeof ApiProfilesRoute
+  '/api/seed-walrus': typeof ApiSeedWalrusRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +99,8 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/insights'
     | '/api/memories'
+    | '/api/profiles'
+    | '/api/seed-walrus'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +109,8 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/insights'
     | '/api/memories'
+    | '/api/profiles'
+    | '/api/seed-walrus'
   id:
     | '__root__'
     | '/'
@@ -97,6 +119,8 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/insights'
     | '/api/memories'
+    | '/api/profiles'
+    | '/api/seed-walrus'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +130,8 @@ export interface RootRouteChildren {
   ApiHealthRoute: typeof ApiHealthRoute
   ApiInsightsRoute: typeof ApiInsightsRoute
   ApiMemoriesRoute: typeof ApiMemoriesRoute
+  ApiProfilesRoute: typeof ApiProfilesRoute
+  ApiSeedWalrusRoute: typeof ApiSeedWalrusRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +178,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiMemoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/profiles': {
+      id: '/api/profiles'
+      path: '/api/profiles'
+      fullPath: '/api/profiles'
+      preLoaderRoute: typeof ApiProfilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/seed-walrus': {
+      id: '/api/seed-walrus'
+      path: '/api/seed-walrus'
+      fullPath: '/api/seed-walrus'
+      preLoaderRoute: typeof ApiSeedWalrusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +202,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHealthRoute: ApiHealthRoute,
   ApiInsightsRoute: ApiInsightsRoute,
   ApiMemoriesRoute: ApiMemoriesRoute,
+  ApiProfilesRoute: ApiProfilesRoute,
+  ApiSeedWalrusRoute: ApiSeedWalrusRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
